@@ -1,5 +1,3 @@
-package java;
-
 class recorder {
 
     public static void main(String [] args) {
