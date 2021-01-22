@@ -5,8 +5,9 @@ RUN javac /app/java/recorder.java
 
 FROM openjdk:11.0-jre-slim-buster
 
-COPY --from=builder /app/java /app/java
-
 WORKDIR /app/java
 
-ENTRYPOINT [ "java", "recorder.class" ]
+COPY --from=builder /app/java/recorder.class recorder.class
+
+
+ENTRYPOINT [ "java", "recorder" ]
