@@ -1,13 +1,9 @@
-FROM openjdk:11.0-jdk-slim-buster as builder
+FROM node:15.6.0-alpine3.12
 
-COPY ./java /app/java
-RUN javac /app/java/recorder.java
+COPY ./node /app/node
 
-FROM openjdk:11.0-jre-slim-buster
+WORKDIR /app/node
 
-WORKDIR /app/java
+RUN npm i
 
-COPY --from=builder /app/java/recorder.class recorder.class
-
-
-ENTRYPOINT [ "java", "recorder" ]
+ENTRYPOINT [ "node", "main.js" ]

@@ -1,0 +1,22 @@
+{
+  "name": "recorder",
+  "version": "1.0.0",
+  "description": "car-data-recorder",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cloudapper/recorder.git"
+  },
+  "author": "henrob",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cloudapper/recorder/issues"
+  },
+  "homepage": "https://github.com/cloudapper/recorder#readme",
+  "dependencies": {
+    "simple-node-logger": "^18.12.24"
+  }
+}
