@@ -28,6 +28,7 @@ for (const key in dataset) {
 log.info('recorder: data collected - start sending...')
 
 const {NODE_API_URL} = process.env;
+
 axios.post(NODE_API_URL, {body}).then((res) => {
     log.info('recorder: data for fin ' + body.fin + ' transmitted succesfully!');
-}).catch(err => log.error('recorder: sending to ' + NODE_API_URL + 'failed: ' + err.message));
+}).catch(err => log.error('recorder: sending to ' + NODE_API_URL + ' failed: ' + err.message));
