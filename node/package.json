@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/cloudapper/recorder#readme",
   "dependencies": {
+    "axios": "^0.21.1",
     "simple-node-logger": "^18.12.24"
   }
 }

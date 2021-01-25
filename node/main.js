@@ -1,3 +1,4 @@
+const axios = require('axios');
 const log = require('simple-node-logger').createSimpleLogger();
 
 const getprogress = (origin) => {
@@ -6,18 +7,27 @@ const getprogress = (origin) => {
     return Math.round((progress * origin)/1000000);
 };
 
-log.info('recorder started reading default file');
+log.info('recorder:reading default file');
 const dataset = require('./default.json');
-let fin;
-let data = [];
+
+let body = 
+{
+    fin: "",
+    data : [] 
+};
+log.info('recorder: collecting data');
 for (const key in dataset) {
     if (key === "fin") {
-        fin = dataset[key];
+        body.fin = dataset[key];
     } else {
         value = dataset[key];
-        data.push(key + ": " + (value + getprogress(value)))
+        body.data.push(key + ": " + (value + getprogress(value)))
     }
 }
 
-console.log(fin);
-console.log(data);
+log.info('recorder: data collected - start sending...')
+
+const {NODE_API_URL} = process.env;
+axios.post(NODE_API_URL, {body}).then((res) => {
+    log.info('recorder: data for fin ' + body.fin + ' transmitted succesfully!');
+}).catch(err => log.error('recorder: sending to ' + NODE_API_URL + 'failed: ' + err.message));
