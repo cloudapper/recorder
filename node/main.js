@@ -1,10 +1,10 @@
 const axios = require('axios');
 const log = require('simple-node-logger').createSimpleLogger();
 
-const getprogress = (origin) => {
+const getProgress = (origin) => {
     const currentDate = new Date();
     let progress = currentDate.getFullYear() + currentDate.getMonth() + currentDate.getDay() + currentDate.getHours() + currentDate.getMinutes()
-    return Math.round((progress * origin)/1000000);
+    return Math.round((progress * origin)/100000);
 };
 
 log.info('recorder:reading default file');
@@ -21,9 +21,11 @@ for (const key in dataset) {
         carDataDTO.fin = dataset[key];
     } else {
         value = dataset[key];
-        carDataDTO.data.push(key + ": " + (value + getprogress(value)))
+        carDataDTO.data.push(key + ": " + (parseFloat(getProgress(value)) + parseFloat(value)));
     }
 }
+
+console.log(carDataDTO);
 
 log.info('recorder: data collected - start sending...')
 
