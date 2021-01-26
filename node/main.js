@@ -4,7 +4,7 @@ const log = require('simple-node-logger').createSimpleLogger();
 const getProgress = (origin) => {
     const currentDate = new Date();
     let progress = currentDate.getFullYear() + currentDate.getMonth() + currentDate.getDay() + currentDate.getHours() + currentDate.getMinutes()
-    return Math.round((progress * origin)/100000);
+    return Math.round((progress * origin)/10000);
 };
 
 log.info('recorder:reading default file');
