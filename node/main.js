@@ -31,13 +31,13 @@ log.info('recorder: data collected - start sending...')
 
 const {NODE_API_URL, NODE_API_USER, NODE_API_PW} = process.env;
 
-const header = {
+const config = {
     auth: {
         username: NODE_API_USER,
         password: NODE_API_PW
     }
 };
 
-axios.post(NODE_API_URL, carDataDTO, header).then((res) => {
+axios.post(NODE_API_URL, carDataDTO, config).then((res) => {
     log.info('recorder: data for fin ' + carDataDTO.fin + ' transmitted succesfully!');
 }).catch(err => log.error('recorder: sending to ' + NODE_API_URL + ' failed: ' + err.message));
