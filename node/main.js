@@ -7,7 +7,7 @@ const getProgress = (origin) => {
     return Math.round((progress * origin)/10000);
 };
 
-log.info('recorder:reading default file');
+log.info('recorder: reading default file');
 const dataset = require('./default.json');
 
 let carDataDTO = 
@@ -24,8 +24,6 @@ for (const key in dataset) {
         carDataDTO.data.push(key + ": " + (parseFloat(getProgress(value)) + parseFloat(value)));
     }
 }
-
-console.log(carDataDTO);
 
 log.info('recorder: data collected - start sending...')
 
