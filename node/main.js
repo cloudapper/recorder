@@ -27,7 +27,7 @@ for (const key in dataset) {
 
 log.info('recorder: data collected - start sending...')
 
-const {NODE_API_URL, NODE_API_USER, NODE_API_PW} = process.env;
+const {NODE_BACKEND_API_URL, NODE_API_USER, NODE_API_PW, NODE_ACCOUNT_API_URL} = process.env;
 
 const config = {
     auth: {
@@ -36,6 +36,13 @@ const config = {
     }
 };
 
-axios.post(NODE_API_URL, carDataDTO, config).then((res) => {
-    log.info('recorder: data for fin ' + carDataDTO.fin + ' transmitted succesfully!');
-}).catch(err => log.error('recorder: sending to ' + NODE_API_URL + ' failed: ' + err.message));
+axios.get(NODE_ACCOUNT_API_URL, config).then(res => {
+    res.data.forEach(fin => {
+        axios.post(NODE_BACKEND_API_URL, {
+            fin,
+            data : carDataDTO.data 
+        }, config).then((res) => {
+            log.info('recorder: data for fin ' + fin + ' transmitted succesfully!');
+        }).catch(err => log.error('recorder: sending to ' + NODE_BACKEND_API_URL + ' for fin ' + fin + ' failed: ' + err.message));
+    });
+})
