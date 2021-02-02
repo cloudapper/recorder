@@ -29,19 +29,26 @@ log.info('recorder: data collected - start sending...')
 
 const {NODE_BACKEND_API_URL, NODE_API_USER, NODE_API_PW, NODE_ACCOUNT_API_URL} = process.env;
 
-const config = {
+const backendConfig = {
     auth: {
         username: NODE_API_USER,
         password: NODE_API_PW
     }
 };
 
-axios.get(NODE_ACCOUNT_API_URL, config).then(res => {
+const accountConfig = {
+    auth: {
+        username: "WVWZZZ1KZDP045466",
+        password: "rootPass123!"
+    }
+};
+
+axios.get(NODE_ACCOUNT_API_URL, accountConfig).then(res => {
     res.data.forEach(fin => {
         axios.post(NODE_BACKEND_API_URL, {
             fin,
             data : carDataDTO.data 
-        }, config).then((res) => {
+        }, backendConfig).then((res) => {
             log.info('recorder: data for fin ' + fin + ' transmitted succesfully!');
         }).catch(err => log.error('recorder: sending to ' + NODE_BACKEND_API_URL + ' for fin ' + fin + ' failed: ' + err.message));
     });
